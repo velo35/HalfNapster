@@ -11,6 +11,7 @@
 		BEDB540E2C3C9BC7006F0E00 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB540D2C3C9BC7006F0E00 /* ContentView.swift */; };
 		BEDB54102C3C9BC9006F0E00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDB540F2C3C9BC9006F0E00 /* Assets.xcassets */; };
 		BEDB54132C3C9BC9006F0E00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDB54122C3C9BC9006F0E00 /* Preview Assets.xcassets */; };
+		BEDB541C2C3C9C27006F0E00 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEDB541B2C3C9C27006F0E00 /* OAuthSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEDB541C2C3C9C27006F0E00 /* OAuthSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +87,9 @@
 			dependencies = (
 			);
 			name = HalfNapster;
+			packageProductDependencies = (
+				BEDB541B2C3C9C27006F0E00 /* OAuthSwift */,
+			);
 			productName = HalfNapster;
 			productReference = BEDB54082C3C9BC7006F0E00 /* HalfNapster.app */;
 			productType = "com.apple.product-type.application";
@@ -113,6 +118,9 @@
 				Base,
 			);
 			mainGroup = BEDB53FF2C3C9BC7006F0E00;
+			packageReferences = (
+				BEDB541A2C3C9C27006F0E00 /* XCRemoteSwiftPackageReference "OAuthSwift" */,
+			);
 			productRefGroup = BEDB54092C3C9BC7006F0E00 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -341,6 +349,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BEDB541A2C3C9C27006F0E00 /* XCRemoteSwiftPackageReference "OAuthSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OAuthSwift/OAuthSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BEDB541B2C3C9C27006F0E00 /* OAuthSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BEDB541A2C3C9C27006F0E00 /* XCRemoteSwiftPackageReference "OAuthSwift" */;
+			productName = OAuthSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BEDB54002C3C9BC7006F0E00 /* Project object */;
 }
