@@ -54,8 +54,8 @@
 		BEDB540A2C3C9BC7006F0E00 /* HalfNapster */ = {
 			isa = PBXGroup;
 			children = (
-				BEDB540B2C3C9BC7006F0E00 /* HalfNapsterApp.swift */,
-				BEDB540D2C3C9BC7006F0E00 /* ContentView.swift */,
+				BEDB541E2C3C9C97006F0E00 /* Views */,
+				BEDB541D2C3C9C8D006F0E00 /* App */,
 				BEDB540F2C3C9BC9006F0E00 /* Assets.xcassets */,
 				BEDB54142C3C9BC9006F0E00 /* HalfNapster.entitlements */,
 				BEDB54112C3C9BC9006F0E00 /* Preview Content */,
@@ -69,6 +69,30 @@
 				BEDB54122C3C9BC9006F0E00 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BEDB541D2C3C9C8D006F0E00 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				BEDB540B2C3C9BC7006F0E00 /* HalfNapsterApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BEDB541E2C3C9C97006F0E00 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BEDB541F2C3C9C9F006F0E00 /* Root */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BEDB541F2C3C9C9F006F0E00 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				BEDB540D2C3C9BC7006F0E00 /* ContentView.swift */,
+			);
+			path = Root;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
