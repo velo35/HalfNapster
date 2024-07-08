@@ -12,6 +12,7 @@
 		BEDB54102C3C9BC9006F0E00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDB540F2C3C9BC9006F0E00 /* Assets.xcassets */; };
 		BEDB54132C3C9BC9006F0E00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDB54122C3C9BC9006F0E00 /* Preview Assets.xcassets */; };
 		BEDB541C2C3C9C27006F0E00 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEDB541B2C3C9C27006F0E00 /* OAuthSwift */; };
+		BEDB54222C3C9ED1006F0E00 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB54212C3C9ED1006F0E00 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		BEDB540F2C3C9BC9006F0E00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEDB54122C3C9BC9006F0E00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BEDB54142C3C9BC9006F0E00 /* HalfNapster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HalfNapster.entitlements; sourceTree = "<group>"; };
+		BEDB54212C3C9ED1006F0E00 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				BEDB541F2C3C9C9F006F0E00 /* Root */,
+				BEDB54212C3C9ED1006F0E00 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEDB54222C3C9ED1006F0E00 /* LoginView.swift in Sources */,
 				BEDB540E2C3C9BC7006F0E00 /* ContentView.swift in Sources */,
 				BEDB540C2C3C9BC7006F0E00 /* HalfNapsterApp.swift in Sources */,
 			);
