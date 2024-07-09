@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct HalfNapsterApp: App {
     var body: some Scene {
-        WindowGroup {
+        Window("Half Napster", id: "half-napster") {
             ContentView()
         }
     }
