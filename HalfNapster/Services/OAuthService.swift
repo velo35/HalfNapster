@@ -11,8 +11,10 @@ import OAuthSwift
 @Observable
 class OAuthService
 {
-    let auth: OAuth2Swift
-    var callback: ((URL) -> Void)!
+    private let auth: OAuth2Swift
+    private var callback: ((URL) -> Void)!
+    
+    var loggedIn = false
     
     init(clientId: String, secret: String)
     {
@@ -36,16 +38,9 @@ class OAuthService
             scope: "",
             state: "") { result in
                 switch result {
-                    case let .success((credential, response, parameter)):
-                        print(credential, parameter)
-                        if let response {
-                            print(response)
-                        }
-                        else {
-                            print("no response")
-                        }
-                        break
-                    case let .failure(error):
+                    case .success(_):
+                        self.loggedIn = true
+                    case .failure(let error):
                         print(error.localizedDescription)
                         break
                 }
@@ -55,6 +50,19 @@ class OAuthService
     func open(_ url: URL)
     {
         OAuthSwift.handle(url: url)
+    }
+    
+    func playlists()
+    {
+        self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists") { result in
+            switch result {
+                case .success(let response):
+                    guard let string = response.string else { return }
+                    print(string)
+                case .failure(let error):
+                    print(error.localizedDescription)
+            }
+        }
     }
 }
 

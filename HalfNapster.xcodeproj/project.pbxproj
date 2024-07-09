@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE18BCA62C3DEAAA0072AE99 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE18BCA52C3DEAAA0072AE99 /* LibraryView.swift */; };
 		BEDB540C2C3C9BC7006F0E00 /* HalfNapsterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB540B2C3C9BC7006F0E00 /* HalfNapsterApp.swift */; };
 		BEDB540E2C3C9BC7006F0E00 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB540D2C3C9BC7006F0E00 /* ContentView.swift */; };
 		BEDB54102C3C9BC9006F0E00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDB540F2C3C9BC9006F0E00 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE18BCA52C3DEAAA0072AE99 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		BEB4C7EF2C3DCF0700CB80E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BEDB54082C3C9BC7006F0E00 /* HalfNapster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HalfNapster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDB540B2C3C9BC7006F0E00 /* HalfNapsterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfNapsterApp.swift; sourceTree = "<group>"; };
@@ -40,6 +42,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE18BCA32C3DEA8B0072AE99 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BE18BCA52C3DEAAA0072AE99 /* LibraryView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		BE18BCA42C3DEA940072AE99 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BEDB54212C3C9ED1006F0E00 /* LoginView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		BEDB53FF2C3C9BC7006F0E00 = {
 			isa = PBXGroup;
 			children = (
@@ -59,12 +77,12 @@
 		BEDB540A2C3C9BC7006F0E00 /* HalfNapster */ = {
 			isa = PBXGroup;
 			children = (
-				BEB4C7EF2C3DCF0700CB80E7 /* Info.plist */,
 				BEDB541D2C3C9C8D006F0E00 /* App */,
 				BEDB54232C3CA512006F0E00 /* Services */,
 				BEDB541E2C3C9C97006F0E00 /* Views */,
 				BEDB540F2C3C9BC9006F0E00 /* Assets.xcassets */,
 				BEDB54142C3C9BC9006F0E00 /* HalfNapster.entitlements */,
+				BEB4C7EF2C3DCF0700CB80E7 /* Info.plist */,
 				BEDB54112C3C9BC9006F0E00 /* Preview Content */,
 			);
 			path = HalfNapster;
@@ -89,8 +107,9 @@
 		BEDB541E2C3C9C97006F0E00 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE18BCA32C3DEA8B0072AE99 /* Library */,
+				BE18BCA42C3DEA940072AE99 /* Login */,
 				BEDB541F2C3C9C9F006F0E00 /* Root */,
-				BEDB54212C3C9ED1006F0E00 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,6 +209,7 @@
 				BEDB54222C3C9ED1006F0E00 /* LoginView.swift in Sources */,
 				BEDB540E2C3C9BC7006F0E00 /* ContentView.swift in Sources */,
 				BEDB540C2C3C9BC7006F0E00 /* HalfNapsterApp.swift in Sources */,
+				BE18BCA62C3DEAAA0072AE99 /* LibraryView.swift in Sources */,
 				BEDB54252C3CA527006F0E00 /* OAuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
