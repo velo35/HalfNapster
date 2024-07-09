@@ -13,6 +13,7 @@
 		BEDB54132C3C9BC9006F0E00 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEDB54122C3C9BC9006F0E00 /* Preview Assets.xcassets */; };
 		BEDB541C2C3C9C27006F0E00 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEDB541B2C3C9C27006F0E00 /* OAuthSwift */; };
 		BEDB54222C3C9ED1006F0E00 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB54212C3C9ED1006F0E00 /* LoginView.swift */; };
+		BEDB54252C3CA527006F0E00 /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB54242C3CA527006F0E00 /* OAuthService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		BEDB54122C3C9BC9006F0E00 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BEDB54142C3C9BC9006F0E00 /* HalfNapster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HalfNapster.entitlements; sourceTree = "<group>"; };
 		BEDB54212C3C9ED1006F0E00 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BEDB54242C3CA527006F0E00 /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +58,9 @@
 		BEDB540A2C3C9BC7006F0E00 /* HalfNapster */ = {
 			isa = PBXGroup;
 			children = (
-				BEDB541E2C3C9C97006F0E00 /* Views */,
 				BEDB541D2C3C9C8D006F0E00 /* App */,
+				BEDB54232C3CA512006F0E00 /* Services */,
+				BEDB541E2C3C9C97006F0E00 /* Views */,
 				BEDB540F2C3C9BC9006F0E00 /* Assets.xcassets */,
 				BEDB54142C3C9BC9006F0E00 /* HalfNapster.entitlements */,
 				BEDB54112C3C9BC9006F0E00 /* Preview Content */,
@@ -96,6 +99,14 @@
 				BEDB540D2C3C9BC7006F0E00 /* ContentView.swift */,
 			);
 			path = Root;
+			sourceTree = "<group>";
+		};
+		BEDB54232C3CA512006F0E00 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BEDB54242C3CA527006F0E00 /* OAuthService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +188,7 @@
 				BEDB54222C3C9ED1006F0E00 /* LoginView.swift in Sources */,
 				BEDB540E2C3C9BC7006F0E00 /* ContentView.swift in Sources */,
 				BEDB540C2C3C9BC7006F0E00 /* HalfNapsterApp.swift in Sources */,
+				BEDB54252C3CA527006F0E00 /* OAuthService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
