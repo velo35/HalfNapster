@@ -11,13 +11,33 @@ struct PlaylistView: View
 {
     @Environment(PlaylistViewModel.self) private var viewModel
     
+    @State private var exportIsPresented = false
+    
     var body: some View
     {
-        List(viewModel.tracks) { track in
-            VStack(alignment: .leading) {
-                Text(track.name)
-                Text(track.artistName)
-                Text(track.albumName)
+        VStack {
+            Button("Export") {
+                exportIsPresented = true
+            }
+            .fileExporter(
+                isPresented: $exportIsPresented,
+                document: PlaylistDocument(name: viewModel.name, tracks: viewModel.tracks),
+                defaultFilename: "\(viewModel.name).txt"
+            ) { result in
+                switch result {
+                    case .success(let url):
+                        debugPrint("saved to: \(url)")
+                    case .failure(let error):
+                        debugPrint(error.localizedDescription)
+                }
+            }
+            
+            List(viewModel.tracks) { track in
+                VStack(alignment: .leading) {
+                    Text(track.name)
+                    Text(track.artistName)
+                    Text(track.albumName)
+                }
             }
         }
     }

@@ -22,6 +22,7 @@
 		BEE3727F2C3F225900CF96B7 /* PlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3727E2C3F225900CF96B7 /* PlaylistViewModel.swift */; };
 		BEE372812C3F22E400CF96B7 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE372802C3F22E400CF96B7 /* Track.swift */; };
 		BEE372832C3F28BE00CF96B7 /* TracksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE372822C3F28BE00CF96B7 /* TracksResponse.swift */; };
+		BEE372852C3F30FD00CF96B7 /* PlaylistDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE372842C3F30FD00CF96B7 /* PlaylistDocument.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		BEE3727E2C3F225900CF96B7 /* PlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewModel.swift; sourceTree = "<group>"; };
 		BEE372802C3F22E400CF96B7 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
 		BEE372822C3F28BE00CF96B7 /* TracksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksResponse.swift; sourceTree = "<group>"; };
+		BEE372842C3F30FD00CF96B7 /* PlaylistDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDocument.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				BE18BCAB2C3DEFE50072AE99 /* Playlist.swift */,
+				BEE372842C3F30FD00CF96B7 /* PlaylistDocument.swift */,
 				BE18BCAD2C3DF01A0072AE99 /* PlaylistsResponse.swift */,
 				BEE372802C3F22E400CF96B7 /* Track.swift */,
 				BEE372822C3F28BE00CF96B7 /* TracksResponse.swift */,
@@ -256,6 +259,7 @@
 				BEE372832C3F28BE00CF96B7 /* TracksResponse.swift in Sources */,
 				BEDB540E2C3C9BC7006F0E00 /* ContentView.swift in Sources */,
 				BEE3727F2C3F225900CF96B7 /* PlaylistViewModel.swift in Sources */,
+				BEE372852C3F30FD00CF96B7 /* PlaylistDocument.swift in Sources */,
 				BEDB540C2C3C9BC7006F0E00 /* HalfNapsterApp.swift in Sources */,
 				BEE3727D2C3F21FC00CF96B7 /* PlaylistView.swift in Sources */,
 				BE18BCAC2C3DEFE50072AE99 /* Playlist.swift in Sources */,
