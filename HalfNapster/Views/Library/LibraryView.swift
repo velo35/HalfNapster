@@ -9,14 +9,15 @@ import SwiftUI
 
 struct LibraryView: View 
 {
-    @Environment(OAuthService.self) private var authService
+    @Environment(LibraryViewModel.self) private var viewModel
     
     var body: some View
     {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .onAppear {
-                authService.playlists()
+        List {
+            ForEach(viewModel.playlists) { playlist in
+                Text(playlist.name)
             }
+        }
     }
 }
 

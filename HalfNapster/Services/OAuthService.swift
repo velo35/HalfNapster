@@ -11,6 +11,7 @@ import OAuthSwift
 @Observable
 class OAuthService
 {
+    private let decoder = JSONDecoder()
     private let auth: OAuth2Swift
     private var callback: ((URL) -> Void)!
     
@@ -18,7 +19,6 @@ class OAuthService
     
     init(clientId: String, secret: String)
     {
-        OAuth2Swift.setLogLevel(.error)
         self.auth = OAuth2Swift(
             consumerKey: clientId,
             consumerSecret: secret,
@@ -52,17 +52,27 @@ class OAuthService
         OAuthSwift.handle(url: url)
     }
     
-    func playlists()
+    var continuation: CheckedContinuation<[Playlist], Never>!
+    
+    func playlists() async -> [Playlist]
     {
-        self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists") { result in
-            switch result {
-                case .success(let response):
-                    guard let string = response.string else { return }
-                    print(string)
-                case .failure(let error):
-                    print(error.localizedDescription)
+        return await withCheckedContinuation { continuation in
+            self.continuation = continuation
+            self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists") { result in
+                switch result {
+                    case .success(let response):
+                        do {
+                            let response = try self.decoder.decode(PlaylistsResponse.self, from: response.data)
+                            self.continuation.resume(returning: response.playlists)
+                        } catch {
+                            debugPrint(error.localizedDescription)
+                        }
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                }
             }
         }
+        
     }
 }
 

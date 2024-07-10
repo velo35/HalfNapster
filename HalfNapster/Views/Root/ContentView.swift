@@ -18,7 +18,7 @@ struct ContentView: View
         Group {
             if authService.loggedIn {
                 LibraryView()
-                    .environment(authService)
+                    .environment(LibraryViewModel(authService: authService))
             }
             else {
                 VStack {
