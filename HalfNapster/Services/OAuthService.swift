@@ -15,7 +15,10 @@ class OAuthService
     private let auth: OAuth2Swift
     private var callback: ((URL) -> Void)!
     
-    var loggedIn = false
+    var loggedIn: Bool
+    {
+        !self.auth.client.credential.oauthToken.isEmpty
+    }
     
     init(clientId: String, secret: String)
     {
@@ -28,6 +31,15 @@ class OAuthService
         )
         self.auth.authorizeURLHandler = self
         self.auth.allowMissingStateCheck = true
+        
+        if let data = UserDefaults.standard.data(forKey: "auth_credential") {
+            do {
+                let credential = try JSONDecoder().decode(OAuthSwiftCredential.self, from: data)
+                self.auth.client = OAuthSwiftClient(credential: credential)
+            } catch {
+                debugPrint(error.localizedDescription)
+            }
+        }
     }
     
     func login(_ callback: @escaping (URL) -> Void)
@@ -38,8 +50,13 @@ class OAuthService
             scope: "",
             state: "") { result in
                 switch result {
-                    case .success(_):
-                        self.loggedIn = true
+                    case .success(let (credential, _, _)):
+                        do {
+                            let data = try JSONEncoder().encode(credential)
+                            UserDefaults.standard.set(data, forKey: "auth_credential")
+                        } catch {
+                            debugPrint(error.localizedDescription)
+                        }
                     case .failure(let error):
                         print(error.localizedDescription)
                         break
@@ -52,24 +69,23 @@ class OAuthService
         OAuthSwift.handle(url: url)
     }
     
-    var continuation: CheckedContinuation<[Playlist], Never>!
-    
     func playlists() async -> [Playlist]
     {
         return await withCheckedContinuation { continuation in
-            self.continuation = continuation
             self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists") { result in
                 switch result {
                     case .success(let response):
                         do {
                             let response = try self.decoder.decode(PlaylistsResponse.self, from: response.data)
-                            self.continuation.resume(returning: response.playlists)
+                            continuation.resume(returning: response.playlists)
+                            return
                         } catch {
                             debugPrint(error.localizedDescription)
                         }
                     case .failure(let error):
                         print(error.localizedDescription)
                 }
+                continuation.resume(returning: [])
             }
         }
         
