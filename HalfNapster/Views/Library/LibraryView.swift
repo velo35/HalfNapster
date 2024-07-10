@@ -13,9 +13,18 @@ struct LibraryView: View
     
     var body: some View
     {
-        List {
-            ForEach(viewModel.playlists) { playlist in
-                Text(playlist.name)
+        NavigationStack {
+            List {
+                ForEach(viewModel.playlists) { playlist in
+                    NavigationLink(value: playlist) {
+                        Text(playlist.name)
+//                        Text("\(playlist.name): \(playlist.id)")
+                    }
+                }
+            }
+            .navigationDestination(for: Playlist.self) { playlist in
+                PlaylistView()
+                    .environment(PlaylistViewModel(playlist: playlist, authService: viewModel.authService))
             }
         }
     }

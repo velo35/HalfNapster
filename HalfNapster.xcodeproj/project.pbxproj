@@ -18,6 +18,10 @@
 		BEDB541C2C3C9C27006F0E00 /* OAuthSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BEDB541B2C3C9C27006F0E00 /* OAuthSwift */; };
 		BEDB54222C3C9ED1006F0E00 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB54212C3C9ED1006F0E00 /* LoginView.swift */; };
 		BEDB54252C3CA527006F0E00 /* OAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDB54242C3CA527006F0E00 /* OAuthService.swift */; };
+		BEE3727D2C3F21FC00CF96B7 /* PlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3727C2C3F21FC00CF96B7 /* PlaylistView.swift */; };
+		BEE3727F2C3F225900CF96B7 /* PlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE3727E2C3F225900CF96B7 /* PlaylistViewModel.swift */; };
+		BEE372812C3F22E400CF96B7 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE372802C3F22E400CF96B7 /* Track.swift */; };
+		BEE372832C3F28BE00CF96B7 /* TracksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE372822C3F28BE00CF96B7 /* TracksResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		BEDB54142C3C9BC9006F0E00 /* HalfNapster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HalfNapster.entitlements; sourceTree = "<group>"; };
 		BEDB54212C3C9ED1006F0E00 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BEDB54242C3CA527006F0E00 /* OAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthService.swift; sourceTree = "<group>"; };
+		BEE3727C2C3F21FC00CF96B7 /* PlaylistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistView.swift; sourceTree = "<group>"; };
+		BEE3727E2C3F225900CF96B7 /* PlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewModel.swift; sourceTree = "<group>"; };
+		BEE372802C3F22E400CF96B7 /* Track.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		BEE372822C3F28BE00CF96B7 /* TracksResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				BE18BCA82C3DEF060072AE99 /* LibraryViewModel.swift */,
+				BEE3727E2C3F225900CF96B7 /* PlaylistViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -77,6 +86,8 @@
 			children = (
 				BE18BCAB2C3DEFE50072AE99 /* Playlist.swift */,
 				BE18BCAD2C3DF01A0072AE99 /* PlaylistsResponse.swift */,
+				BEE372802C3F22E400CF96B7 /* Track.swift */,
+				BEE372822C3F28BE00CF96B7 /* TracksResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -134,6 +145,7 @@
 			children = (
 				BE18BCA32C3DEA8B0072AE99 /* Library */,
 				BE18BCA42C3DEA940072AE99 /* Login */,
+				BEE3727B2C3F21E600CF96B7 /* Playlist */,
 				BEDB541F2C3C9C9F006F0E00 /* Root */,
 			);
 			path = Views;
@@ -153,6 +165,14 @@
 				BEDB54242C3CA527006F0E00 /* OAuthService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		BEE3727B2C3F21E600CF96B7 /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				BEE3727C2C3F21FC00CF96B7 /* PlaylistView.swift */,
+			);
+			path = Playlist;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,8 +252,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEDB54222C3C9ED1006F0E00 /* LoginView.swift in Sources */,
+				BEE372812C3F22E400CF96B7 /* Track.swift in Sources */,
+				BEE372832C3F28BE00CF96B7 /* TracksResponse.swift in Sources */,
 				BEDB540E2C3C9BC7006F0E00 /* ContentView.swift in Sources */,
+				BEE3727F2C3F225900CF96B7 /* PlaylistViewModel.swift in Sources */,
 				BEDB540C2C3C9BC7006F0E00 /* HalfNapsterApp.swift in Sources */,
+				BEE3727D2C3F21FC00CF96B7 /* PlaylistView.swift in Sources */,
 				BE18BCAC2C3DEFE50072AE99 /* Playlist.swift in Sources */,
 				BE18BCA62C3DEAAA0072AE99 /* LibraryView.swift in Sources */,
 				BE18BCA92C3DEF060072AE99 /* LibraryViewModel.swift in Sources */,

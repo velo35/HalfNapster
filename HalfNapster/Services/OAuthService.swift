@@ -22,6 +22,7 @@ class OAuthService
     
     init(clientId: String, secret: String)
     {
+//        OAuthSwift.setLogLevel(.error)
         self.auth = OAuth2Swift(
             consumerKey: clientId,
             consumerSecret: secret,
@@ -36,6 +37,7 @@ class OAuthService
             do {
                 let credential = try JSONDecoder().decode(OAuthSwiftCredential.self, from: data)
                 self.auth.client = OAuthSwiftClient(credential: credential)
+                debugPrint(self.auth.client.credential.oauthToken)
             } catch {
                 debugPrint(error.localizedDescription)
             }
@@ -58,8 +60,7 @@ class OAuthService
                             debugPrint(error.localizedDescription)
                         }
                     case .failure(let error):
-                        print(error.localizedDescription)
-                        break
+                        debugPrint(error.localizedDescription)
                 }
             }
     }
@@ -72,23 +73,44 @@ class OAuthService
     func playlists() async -> [Playlist]
     {
         return await withCheckedContinuation { continuation in
-            self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists") { result in
+            self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists?limit=100") { result in
+                var playlists = [Playlist]()
                 switch result {
                     case .success(let response):
                         do {
                             let response = try self.decoder.decode(PlaylistsResponse.self, from: response.data)
-                            continuation.resume(returning: response.playlists)
-                            return
+                            playlists = response.playlists
                         } catch {
                             debugPrint(error.localizedDescription)
                         }
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        debugPrint(error.localizedDescription)
                 }
-                continuation.resume(returning: [])
+                continuation.resume(returning: playlists)
             }
         }
-        
+    }
+    
+    func tracks(`for` playlist: Playlist) async -> [Track]
+    {
+        return await withCheckedContinuation { continuation in
+            self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists/\(playlist.id)/tracks?limit=100") { result in
+                var tracks = [Track]()
+                switch result {
+                    case .success(let response):
+                        do {
+                            let response = try self.decoder.decode(TracksResponse.self, from: response.data)
+                            tracks = response.tracks
+                        }
+                        catch {
+                            debugPrint(error.localizedDescription)
+                        }
+                    case .failure(let error):
+                        debugPrint(error.localizedDescription)
+                }
+                continuation.resume(returning: tracks)
+            }
+        }
     }
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Playlist: Identifiable, Decodable
+struct Playlist: Identifiable, Hashable, Decodable
 {
     let id: String
     let name: String

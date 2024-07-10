@@ -10,7 +10,7 @@ import Foundation
 @Observable
 class LibraryViewModel
 {
-    private let authService: OAuthService
+    let authService: OAuthService
     
     private(set) var playlists = [Playlist]()
     
@@ -19,12 +19,7 @@ class LibraryViewModel
         self.authService = authService
         
         Task {
-            await self.fetchPlaylists()
+            self.playlists = await self.authService.playlists()
         }
-    }
-    
-    private func fetchPlaylists() async
-    {
-        self.playlists = await self.authService.playlists()
     }
 }
