@@ -50,7 +50,8 @@ class OAuthService
         self.auth.authorize(
             withCallbackURL: "com.scottdaniel.HalfNapster://oauth-login", 
             scope: "",
-            state: "") { result in
+            state: ""
+        ) { result in
                 switch result {
                     case .success(let (credential, _, _)):
                         do {
@@ -70,46 +71,64 @@ class OAuthService
         OAuthSwift.handle(url: url)
     }
     
-    func playlists() async -> [Playlist]
+    private func fetchPlaylists(_ count: Int, _ continuation: AsyncThrowingStream<[Playlist], Error>.Continuation)
     {
-        return await withCheckedContinuation { continuation in
-            self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists?limit=100") { result in
-                var playlists = [Playlist]()
-                switch result {
-                    case .success(let response):
-                        do {
-                            let response = try self.decoder.decode(PlaylistsResponse.self, from: response.data)
-                            playlists = response.playlists
-                        } catch {
-                            debugPrint(error.localizedDescription)
+        self.auth.startAuthorizedRequest("https://api.napster.com/v2.2/me/library/playlists?offset=\(count)", method: .GET, parameters: [:]) { result in
+            switch result {
+                case .success(let response):
+                    do {
+                        let response = try self.decoder.decode(PlaylistsResponse.self, from: response.data)
+                        continuation.yield(response.playlists)
+                        if count + response.returnedCount < response.totalCount {
+                            self.fetchPlaylists(count + response.returnedCount, continuation)
                         }
-                    case .failure(let error):
-                        debugPrint(error.localizedDescription)
-                }
-                continuation.resume(returning: playlists)
+                        else {
+                            continuation.finish()
+                        }
+                    } catch {
+                        continuation.finish(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.finish(throwing: error)
             }
         }
     }
     
-    func tracks(`for` playlist: Playlist) async -> [Track]
+    func playlists() -> AsyncThrowingStream<[Playlist], Error>
     {
-        return await withCheckedContinuation { continuation in
-            self.auth.client.get("https://api.napster.com/v2.2/me/library/playlists/\(playlist.id)/tracks?limit=100") { result in
-                var tracks = [Track]()
-                switch result {
-                    case .success(let response):
-                        do {
-                            let response = try self.decoder.decode(TracksResponse.self, from: response.data)
-                            tracks = response.tracks
+        AsyncThrowingStream { continuation in
+            fetchPlaylists(0, continuation)
+        }
+    }
+    
+    private func fetchTracks(_ id: String, _ count: Int, _ continuation: AsyncThrowingStream<[Track], Error>.Continuation)
+    {
+        self.auth.startAuthorizedRequest("https://api.napster.com/v2.2/me/library/playlists/\(id)/tracks?limit=20&offset=\(count)", method: .GET, parameters: [:]) { result in
+            switch result {
+                case .success(let response):
+                    do {
+                        let response = try self.decoder.decode(TracksResponse.self, from: response.data)
+                        continuation.yield(response.tracks)
+                        if count + response.returnedCount < response.totalCount {
+                            self.fetchTracks(id, count + response.returnedCount, continuation)
                         }
-                        catch {
-                            debugPrint(error.localizedDescription)
+                        else {
+                            continuation.finish()
                         }
-                    case .failure(let error):
-                        debugPrint(error.localizedDescription)
-                }
-                continuation.resume(returning: tracks)
+                    }
+                    catch {
+                        continuation.finish(throwing: error)
+                    }
+                case .failure(let error):
+                    continuation.finish(throwing: error)
             }
+        }
+    }
+    
+    func tracks(`for` playlist: Playlist) -> AsyncThrowingStream<[Track], Error>
+    {
+        AsyncThrowingStream { continuation in
+            fetchTracks(playlist.id, 0, continuation)
         }
     }
 }

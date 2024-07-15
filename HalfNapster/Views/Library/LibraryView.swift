@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LibraryView: View 
 {
+    @Environment(OAuthService.self) private var authService
     @Environment(LibraryViewModel.self) private var viewModel
     
     var body: some View
@@ -18,13 +19,12 @@ struct LibraryView: View
                 ForEach(viewModel.playlists) { playlist in
                     NavigationLink(value: playlist) {
                         Text(playlist.name)
-//                        Text("\(playlist.name): \(playlist.id)")
                     }
                 }
             }
             .navigationDestination(for: Playlist.self) { playlist in
                 PlaylistView()
-                    .environment(PlaylistViewModel(playlist: playlist, authService: viewModel.authService))
+                    .environment(PlaylistViewModel(playlist: playlist, authService: authService))
             }
         }
     }

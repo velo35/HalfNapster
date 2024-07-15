@@ -16,6 +16,10 @@ struct PlaylistView: View
     var body: some View
     {
         VStack {
+            if viewModel.isLoadingTracks {
+                ProgressView()
+            }
+            
             Button("Export") {
                 exportIsPresented = true
             }

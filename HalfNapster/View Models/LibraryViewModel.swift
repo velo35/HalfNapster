@@ -10,16 +10,23 @@ import Foundation
 @Observable
 class LibraryViewModel
 {
-    let authService: OAuthService
-    
     private(set) var playlists = [Playlist]()
+    var isLoadingTracks = false
+    var playlistsLoadedSuccessfully = false
     
     init(authService: OAuthService)
     {
-        self.authService = authService
-        
         Task {
-            self.playlists = await self.authService.playlists()
+            isLoadingTracks = true
+            do {
+                for try await newPlaylists in authService.playlists() {
+                    self.playlists.append(contentsOf: newPlaylists)
+                }
+                playlistsLoadedSuccessfully = true
+            } catch {
+                debugPrint(error.localizedDescription)
+            }
+            isLoadingTracks = false
         }
     }
 }
