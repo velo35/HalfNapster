@@ -23,7 +23,7 @@ class PlaylistViewModel
             isLoadingTracks = true
             do {
                 for try await newTracks in authService.tracks(for: playlist) {
-                    self.tracks.append(contentsOf: newTracks)
+                    self.tracks.append(contentsOf: newTracks.filter({ newTrack in !self.tracks.contains{ $0.id == newTrack.id } }))
                 }
                 tracksLoadedSuccessfully = true
             } catch {
