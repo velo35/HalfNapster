@@ -109,7 +109,7 @@ class OAuthService
                     do {
                         let response = try self.decoder.decode(TracksResponse.self, from: response.data)
                         continuation.yield(response.tracks)
-                        if count + response.returnedCount < response.totalCount {
+                        if response.returnedCount > 0 && count + response.returnedCount < response.totalCount {
                             self.fetchTracks(id, count + response.returnedCount, continuation)
                         }
                         else {
