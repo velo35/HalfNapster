@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppKit
 
 struct LibraryView: View 
 {
@@ -14,31 +15,8 @@ struct LibraryView: View
     
     @State private var isSelecting = false
     @State private var selection = Set<Playlist.ID>()
-    @State private var isExporting = false
     @State private var exportIsPresented = false
-    @State private var document: PlaylistDocument?
-    
-    private func exportSelection()
-    {
-        Task {
-            isExporting = true
-            do {
-                var playlists = [PlaylistDocumentEntry]()
-                for selectionId in selection {
-                    let playlist = viewModel.playlists.first(where: { $0.id == selectionId })!
-                    let tracks = try await authService.allTracks(for: playlist)
-                    
-                    playlists.append(PlaylistDocumentEntry(name: playlist.name, tracks: tracks))
-                }
-                document = PlaylistDocument(playlists: playlists)
-                exportIsPresented = true
-            } catch {
-                debugPrint(error.localizedDescription)
-                isExporting = false
-                isSelecting = false
-            }
-        }
-    }
+    @State private var exportViewModel = ExportViewModel()
     
     var body: some View
     {
@@ -54,19 +32,29 @@ struct LibraryView: View
                 }
             }
             .overlay {
-                if isExporting {
-                    ProgressView()
+                if exportViewModel.isExporting {
+                    ProgressView("Exporting...", value: Double(exportViewModel.exportedCount), total: Double(exportViewModel.totalCount))
+                        .padding()
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color(NSColor.windowBackgroundColor))
+                        }
+                        .padding()
                 }
             }
-            .disabled(isExporting)
+            .disabled(exportViewModel.isExporting)
             .toolbar {
                 if isSelecting {
                     Button("Export") {
-                        exportSelection()
+                        Task {
+                            let playlists = selection.map{ playlistId in viewModel.playlists.first(where: { $0.id == playlistId })! }
+                            try await exportViewModel.export(playlists: playlists, authService: authService)
+                            exportIsPresented = true
+                        }
                     }
                     .fileExporter(
                         isPresented: $exportIsPresented,
-                        document: document,
+                        document: exportViewModel.document,
                         defaultFilename: "playlists.txt"
                     ) { result in
                         switch result {
@@ -75,7 +63,6 @@ struct LibraryView: View
                             case .failure(let error):
                                 debugPrint(error.localizedDescription)
                         }
-                        isExporting = false
                         isSelecting = false
                     }
                 }
