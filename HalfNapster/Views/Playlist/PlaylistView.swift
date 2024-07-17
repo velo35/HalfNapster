@@ -25,7 +25,7 @@ struct PlaylistView: View
             }
             .fileExporter(
                 isPresented: $exportIsPresented,
-                document: PlaylistDocument(name: viewModel.name, tracks: viewModel.tracks),
+                document: PlaylistDocument(playlists: [PlaylistDocumentEntry(name: viewModel.name, tracks: viewModel.tracks)]),
                 defaultFilename: "\(viewModel.name).txt"
             ) { result in
                 switch result {

@@ -131,6 +131,15 @@ class OAuthService
             fetchTracks(playlist.id, 0, continuation)
         }
     }
+    
+    func allTracks(`for` playlist: Playlist) async throws -> [Track]
+    {
+        var tracks = [Track]()
+        for try await newTracks in self.tracks(for: playlist) {
+            tracks.append(contentsOf: newTracks.filter({ newTrack in !tracks.contains{ $0.id == newTrack.id } }))
+        }
+        return tracks
+    }
 }
 
 extension OAuthService: OAuthSwiftURLHandlerType
